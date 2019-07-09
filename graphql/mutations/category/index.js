@@ -6,4 +6,4 @@ module.exports = {
     addCategory,
     removeCategory,
     updateCategory
-}
+};

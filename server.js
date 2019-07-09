@@ -16,5 +16,12 @@ app.use('/graphql', cors(), graphqlHTTP({
         categorySchema,
         keystoreSchema,
         userSchema
-    ]
+    ],
+    rootValue: global,
+    graphiql: true
 }));
+
+app.listen(process.env.PORT || 4000, () => {
+    console.log('GraphQL API running at port 4000');
+});
+
