@@ -7,9 +7,9 @@ import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import schemas from './schemas';
 import resolvers from './resolvers';
 
-import category from './models/category';
-import keystore from './models/keystore';
-import user from './models/user';
+import categoryModel from './models/categoryModel';
+import keystoreModel from './models/keystoreModel';
+import userModel from './models/userModel';
 
 const app = express();
 app.use(cors());
@@ -36,9 +36,9 @@ const server = new ApolloServer({
       return {
         me,
         models: {
-            category,
-            keystore,
-            user
+            categoryModel,
+            keystoreModel,
+            userModel
         }
       };
     }
@@ -47,6 +47,19 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, path: '/graphql' });
 
-app.listen(5000, () => {
-  mongoose.connect('mongodb://localhost:27017/mykeystore');
+mongoose.set('useCreateIndex', true);
+
+app.listen(5000, async () => {
+    try {
+        await mongoose.connect('mongodb://localhost:27017/mykeystore',
+            { useNewUrlParser: true });
+
+        console.log('>>> DB is connected');
+
+    } catch (e) {
+        console.log('Something goes worng!');
+        console.log(e);
+    }
+
+    console.log('Server on port 5000');
 });

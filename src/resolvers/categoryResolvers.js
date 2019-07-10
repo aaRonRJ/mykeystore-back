@@ -2,31 +2,31 @@ import { AuthenticationError } from 'apollo-server';
 
 export default {
     Query: {
-        category: async (parent, { id }, { models: { category }, me }, info) => {
+        category: async (parent, { id }, { models: { categoryModel }, me }, info) => {
             if (!me) {
                 throw new AuthenticationError('You are not authenticated');
             }
 
-            const category = await category.findById({ _id: id }).exec();
+            const category = await categoryModel.findById({ _id: id }).exec();
             return category;
         },
-        categories: async (parent, args, { models: { category }, me }, info) => {
+        categories: async (parent, args, { models: { categoryModel }, me }, info) => {
             if (!me) {
                 throw new AuthenticationError('You are not authenticated');
             }
 
-            const categories = await category.find().exec();
+            const categories = await categoryModel.find().exec();
             return categories;
         }
     },
     Mutation: {
-        createCategory: async (parent, { name }, { models: { category }, me }, info) => {
+        createCategory: async (parent, { name }, { models: { categoryModel }, me }, info) => {
             if (!me) {
                 throw new AuthenticationError('You are not authenticated');
             }
 
-            const cat = await category.create({ name });
-            return cat;
+            const category = await categoryModel.create({ name });
+            return category;
         }
     }
 }
