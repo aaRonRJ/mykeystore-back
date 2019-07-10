@@ -14,7 +14,7 @@ export default {
             if (!me) {
                 throw new AuthenticationError('You are not authenticated');
             }
-
+            console.log(categoryModel);
             const categories = await categoryModel.find().exec();
             return categories;
         }

@@ -36,7 +36,4 @@ const keystoreSchema = new mongoose.Schema({
 
 const keystore = mongoose.model('keystore', keystoreSchema);
 
-export default [
-    keystoreSchema,
-    keystore
-];
+export default keystore;
