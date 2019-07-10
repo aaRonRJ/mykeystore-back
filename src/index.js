@@ -57,7 +57,7 @@ app.listen(5000, async () => {
         console.log('>>> DB is connected');
 
     } catch (e) {
-        console.log('Something goes worng!');
+        console.log('Something goes wrong!');
         console.log(e);
     }
 
