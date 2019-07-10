@@ -13,7 +13,6 @@ export default {
         },
         login: async (parent, { email, password }, { models: { userModel } }, info) => {
             const user = await userModel.findOne({ email }).exec();
-            console.log('Usuario logeado', JSON.stringify(user));
 
             if (!user) {
                 throw new AuthenticationError('Not exist user');
