@@ -11,11 +11,12 @@ export default {
             const user = await userModel.findById({ _id: id }).exec();
             return user;
         },
-        login: async (parent, { name, password }, { models: { userModel } }, info) => {
-            const user = await userModel.findOne({ name }).exec();
+        login: async (parent, { email, password }, { models: { userModel } }, info) => {
+            const user = await userModel.findOne({ email }).exec();
+            console.log('Usuario logeado', JSON.stringify(user));
 
             if (!user) {
-                throw new AuthenticationError('Invalid credentials');
+                throw new AuthenticationError('Not exist user');
             }
 
             const matchPasswords = bcrypt.compareSync(password, user.password);
